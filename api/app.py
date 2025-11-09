@@ -14,7 +14,7 @@ def authenticate(request : Request):
         raise HTTPException(status_code = 404, detail = 'item not found' )
 
 @application.get('/')
-def root(_ : bool = Depends(authenticate)):
+def root():
     return {"Amruta" : "pune"}
 
 @application.get('/items/{item_id}')
@@ -22,7 +22,7 @@ def param(item_id : int):
     return {"Amruta" : "coder", "id" : item_id}
 
 @application.get('/norm_para')
-def norm_para(s: Person= Depends()):
+def norm_para(s: Person= Depends(), _:authenticate = authenticate):
     return {"name": s.name,
             "gender": s.gender
             }
